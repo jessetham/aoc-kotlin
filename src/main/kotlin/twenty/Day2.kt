@@ -3,23 +3,25 @@ package twenty
 import util.Resources
 
 object Day2 {
-    fun part1(input: List<List<String>>): Int {
+    data class Input(val l: Int, val h: Int, val c: Char, val pass: String)
+
+    fun part1(input: List<Input>): Int {
         var validPasswords = 0
         for ((l, h, c, pass) in input) {
-            val cCount = pass.count { it == c.single() }
-            if (l.toInt() <= cCount && cCount <= h.toInt()) {
+            val cCount = pass.count { it == c }
+            if (cCount in l..h) {
                 validPasswords++
             }
         }
         return validPasswords
     }
 
-    fun part2(input: List<List<String>>) : Int {
+    fun part2(input: List<Input>): Int {
         var validPasswords = 0
         for ((l, h, c, pass) in input) {
-            val first = pass.elementAtOrElse(l.toInt() - 1) {' '}
-            val second = pass.elementAtOrElse(h.toInt() - 1) {' '}
-            if ((first == c.single()) xor (second == c.single())) {
+            val first = pass.elementAtOrElse(l - 1) { ' ' }
+            val second = pass.elementAtOrElse(h - 1) { ' ' }
+            if ((first == c) xor (second == c)) {
                 validPasswords++
             }
         }
@@ -29,7 +31,7 @@ object Day2 {
 
 fun main() {
     val regex = """(\d+)-(\d+)\s(\w):\s(\w+)"""
-    val input = Resources.readFileAsListAndParse("twenty/day2.txt", regex.toRegex())
+    val input = Resources.readFileAsListAndParse("twenty/day2.txt", regex.toRegex()).map { (l, h, c, pass) -> Day2.Input(l.toInt(), h.toInt(), c.single(), pass) }
     println(Day2.part1(input))
     println(Day2.part2(input))
 }

@@ -9,7 +9,7 @@ import java.net.URI
 object Resources {
     private fun String.toURI(): URI =
             Resources.javaClass.classLoader.getResource(this)?.toURI()
-                    ?: throw FileNotFoundException("File does not exist")
+                    ?: throw FileNotFoundException("file does not exist $this")
 
     private fun String.parseUsingRegex(regex: Regex): List<String> {
         return regex.matchEntire(this)?.destructured?.toList()
@@ -24,7 +24,5 @@ object Resources {
     fun readFileAsIntcodeInstructions(filename: String): Map<Long, Long> =
             readFileAsString(filename).split(",").withIndex().associate { it.index.toLong() to it.value.toLong() }
 
-    fun readFileAsListAndParse(filename: String, regex: Regex): List<List<String>> {
-        return readFileAsList(filename).map { it.parseUsingRegex(regex) }
-    }
+    fun readFileAsListAndParse(filename: String, regex: Regex): List<List<String>> = readFileAsList(filename).map { it.parseUsingRegex(regex) }
 }
