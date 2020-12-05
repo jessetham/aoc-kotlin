@@ -1,11 +1,11 @@
 package util
 
-private class Node {
-    val children = mutableMapOf<Char, Node>()
-    var word: String? = null
-}
-
 class Trie(words: List<String>) {
+    private class Node {
+        val children = mutableMapOf<Char, Node>()
+        var word: String? = null
+    }
+
     private val root = Node()
 
     init {
