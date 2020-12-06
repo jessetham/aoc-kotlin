@@ -16,6 +16,18 @@ object Resources {
                 ?: throw IllegalArgumentException("regex couldn't parse $this")
     }
 
+    fun List<String>.splitByEmptyLine(): List<List<String>> {
+        val res = mutableListOf(mutableListOf<String>())
+        for (line in this) {
+            if (line.isEmpty()) {
+                res.add(mutableListOf())
+            } else {
+                res.last().add(line)
+            }
+        }
+        return res
+    }
+
     fun readFileAsList(filename: String): List<String> = File(filename.toURI()).readLines()
 
     fun readFileAsString(filename: String, delimiter: String = ""): String =

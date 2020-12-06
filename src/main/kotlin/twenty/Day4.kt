@@ -2,10 +2,10 @@ package twenty
 
 import util.Resources
 
-val requiredFields = setOf("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid")
-val validEyeColors = setOf("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
-
 object Day4 {
+    val requiredFields = setOf("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid")
+    val validEyeColors = setOf("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
+
     private fun verify(field: String, value: String): Boolean {
         return when (field) {
             "byr" -> value.length == 4 && value.toInt() in 1920..2002
