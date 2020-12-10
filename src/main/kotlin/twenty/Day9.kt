@@ -37,15 +37,15 @@ object Day9 {
         var l = 0
         var sum = 0L
         for (r in input.indices) {
+            sum += input[r]
             while (sum > target) {
                 sum -= input[l]
                 l++
             }
-            if (sum == target) {
-                val view = input.subList(l, r)
+            if (sum == target && r - l >= 2) {
+                val view = input.subList(l, r + 1)
                 return view.maxOrNull()!! + view.minOrNull()!!
             }
-            sum += input[r]
         }
         return -1
     }
