@@ -5,16 +5,6 @@ import util.Resources
 object Day11 {
     val deltas = listOf(-1 to 0, -1 to 1, 0 to 1, 1 to 1, 1 to 0, 1 to -1, 0 to -1, -1 to -1)
 
-    fun gridEqual(prev: List<CharArray>, current: List<CharArray>): Boolean {
-        for (r in current.indices) {
-            for (c in current[r].indices) {
-                if (prev[r][c] != current[r][c])
-                    return false
-            }
-        }
-        return true
-    }
-
     fun isOccupied(grid: List<CharArray>, r: Int, dr: Int, c: Int, dc: Int): Boolean {
         var mr = r
         var mc = c
@@ -51,7 +41,7 @@ object Day11 {
             }
             val tmp = prev
             prev = current
-        } while (!gridEqual(tmp, current))
+        } while ((current zip tmp).any { (c, t) -> !c.contentEquals(t) })
         return prev.map { row -> row.count { seat -> seat == '#' } }.sum()
     }
 }
