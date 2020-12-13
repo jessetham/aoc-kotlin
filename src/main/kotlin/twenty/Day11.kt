@@ -29,7 +29,7 @@ object Day11 {
             for (r in current.indices) {
                 for (c in current[r].indices) {
                     // To do part 1, just check adjacent seats. Also, change the numOccupied condition in the else-if case to 4
-                    val numOccupied = deltas.filter { (dr, dc) -> isOccupied(prev, r, dr, c, dc) }.size
+                    val numOccupied = deltas.count { (dr, dc) -> isOccupied(prev, r, dr, c, dc) }
                     current[r][c] = if (prev[r][c] == 'L' && numOccupied == 0) {
                         '#'
                     } else if (prev[r][c] == '#' && numOccupied >= 5) {

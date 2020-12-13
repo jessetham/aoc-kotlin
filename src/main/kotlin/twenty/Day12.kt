@@ -33,7 +33,7 @@ object Day12 {
                 'W' -> waypoint = Cartesian2D(waypoint.x - m, waypoint.y)
                 'L' -> repeat(m / 90) { waypoint = Cartesian2D(-waypoint.y, waypoint.x) }
                 'R' -> repeat(m / 90) { waypoint = Cartesian2D(waypoint.y, -waypoint.x) }
-                'F' -> repeat(m) { position = Cartesian2D(position.x + waypoint.x, position.y + waypoint.y) }
+                'F' -> position = Cartesian2D(position.x + waypoint.x * m, position.y + waypoint.y * m)
             }
         }
         return position.x.absoluteValue + position.y.absoluteValue
@@ -43,7 +43,7 @@ object Day12 {
 fun main() {
     val input = Resources.readFileAsList("input.txt").map { it[0] to it.substring(1).toInt() }
 
-    // Part 1
+    // Part 1sc
     println(Day12.travelWithGuessedInstructions(input))
     // Part 2
     println(Day12.travelWithActualInstructions(input))
