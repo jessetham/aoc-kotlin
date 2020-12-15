@@ -43,7 +43,7 @@ object Day12 {
 fun main() {
     val input = Resources.readFileAsList("input.txt").map { it[0] to it.substring(1).toInt() }
 
-    // Part 1sc
+    // Part 1
     println(Day12.travelWithGuessedInstructions(input))
     // Part 2
     println(Day12.travelWithActualInstructions(input))

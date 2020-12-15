@@ -2,7 +2,7 @@ package nineteen
 
 import util.Coordinates.Cartesian3D
 import util.Resources
-import util.Math
+import util.MyMath
 import java.util.*
 import kotlin.math.absoluteValue
 
@@ -50,7 +50,7 @@ object Day12 {
             steps++
         }
 
-        return Math.lcm(*periods.toLongArray())
+        return MyMath.lcm(*periods.toLongArray())
     }
 
     private fun step(

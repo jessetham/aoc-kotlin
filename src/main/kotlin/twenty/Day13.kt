@@ -1,11 +1,11 @@
 package twenty
 
 import util.Resources
-import util.Math
+import util.MyMath
 
 object Day13 {
     fun getEarliestBus(estimate: Int, buses: List<Long>): Long {
-        val waiting = buses.map { it to it - (estimate % it) }
+        val waiting = buses.map { it to (it - (estimate % it)) % it }
         return waiting.minByOrNull { it.second }!!.let { it.first * it.second }
     }
 
@@ -16,7 +16,7 @@ object Day13 {
             while ((timestamp + buses[i].first) % buses[i].second != 0L) {
                 timestamp += step
             }
-            step = Math.lcm(step, buses[i].second)
+            step = MyMath.lcm(step, buses[i].second)
         }
         return timestamp
     }
@@ -29,7 +29,6 @@ fun main() {
 
     // Part 1
     println(Day13.getEarliestBus(estimate, buses.map { it.second }))
-
     // Part 2
     println(Day13.getGoldCoin(buses))
 }

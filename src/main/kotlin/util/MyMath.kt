@@ -2,7 +2,7 @@ package util
 
 import kotlin.math.absoluteValue
 
-object Math {
+object MyMath {
     // Heap's algorithm, taken from Wikipedia
     fun <T> permutations(candidates: List<T>): Sequence<List<T>> = sequence {
         val n = candidates.size
@@ -17,7 +17,7 @@ object Math {
                     mutableCandidates[0] = mutableCandidates[i].also { mutableCandidates[i] = mutableCandidates[0] }
                 } else {
                     mutableCandidates[c[i]] =
-                        mutableCandidates[i].also { mutableCandidates[i] = mutableCandidates[c[i]] }
+                            mutableCandidates[i].also { mutableCandidates[i] = mutableCandidates[c[i]] }
                 }
                 yield(mutableCandidates)
                 c[i]++
@@ -27,6 +27,25 @@ object Math {
                 i++
             }
         }
+    }
+
+    // A hastily written copy of itertools.product from Python
+    fun product(vararg strings: String, count: Int = 1): List<String> {
+        val pools = mutableListOf<String>()
+        repeat(count) {
+            pools.addAll(strings)
+        }
+        var result = mutableListOf("")
+        for (pool in pools) {
+            val newResult =  mutableListOf<String>()
+            for (x in result) {
+                for (y in pool) {
+                    newResult.add(x + y)
+                }
+            }
+            result = newResult
+        }
+        return result
     }
 
     // Euclidean algorithm

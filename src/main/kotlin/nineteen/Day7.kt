@@ -1,6 +1,6 @@
 package nineteen
 
-import util.Math.permutations
+import util.MyMath.permutations
 import nineteen.intcode.Context
 import nineteen.intcode.Intcode
 import util.Resources
