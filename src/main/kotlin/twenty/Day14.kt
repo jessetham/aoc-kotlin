@@ -39,7 +39,7 @@ object Day14 {
                     numFloating = currentMask.count { it == 'X' }
                 }
                 is Day14Expr.Memory -> {
-                    for (combination in MyMath.product("01", count = numFloating)) {
+                    for (combination in MyMath.product("01".toList(), count = numFloating)) {
                         var i = 0
                         val floatingAddress = currentMask.zip(expr.address)
                                 .map { (cm, a) ->

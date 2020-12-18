@@ -29,23 +29,16 @@ object MyMath {
         }
     }
 
-    // A hastily written copy of itertools.product from Python
-    fun product(vararg strings: String, count: Int = 1): List<String> {
-        val pools = mutableListOf<String>()
+    // A modified version of what was found here: https://stackoverflow.com/questions/53749357/idiomatic-way-to-create-n-ary-cartesian-product-combinations-of-several-sets-of
+    // Should work kind of similarly to itertools.product in Python
+    fun <T> product(vararg lists: List<T>, count: Int = 1): List<List<T>> {
+        val pools = mutableListOf<List<T>>()
         repeat(count) {
-            pools.addAll(strings)
+            pools.addAll(lists)
         }
-        var result = mutableListOf("")
-        for (pool in pools) {
-            val newResult =  mutableListOf<String>()
-            for (x in result) {
-                for (y in pool) {
-                    newResult.add(x + y)
-                }
-            }
-            result = newResult
-        }
-        return result
+        return pools.fold(listOf(listOf<T>())) { acc, set ->
+            acc.flatMap { list -> set.map { element -> list + element } }
+        }.toList()
     }
 
     // Euclidean algorithm
