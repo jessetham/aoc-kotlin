@@ -36,8 +36,8 @@ object MyMath {
         repeat(count) {
             pools.addAll(lists)
         }
-        return pools.fold(listOf(listOf<T>())) { acc, set ->
-            acc.flatMap { list -> set.map { element -> list + element } }
+        return pools.fold(listOf(listOf<T>())) { acc, pool ->
+            acc.flatMap { list -> pool.map { element -> list + element } }
         }.toList()
     }
 
