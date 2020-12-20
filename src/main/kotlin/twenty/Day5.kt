@@ -17,9 +17,7 @@ object Day5 {
         return l
     }
 
-    fun transform(line: String): Int {
-        return line.map { c -> if (c == 'F' || c == 'L') '0' else '1' }.joinToString("").toInt(2)
-    }
+    fun transform(line: String) = line.map { c -> if (c == 'F' || c == 'L') '0' else '1' }.joinToString("").toInt(2)
 }
 
 fun main() {
