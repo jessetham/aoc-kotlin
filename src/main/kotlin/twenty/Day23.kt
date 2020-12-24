@@ -9,7 +9,8 @@ object Day23 {
         return target
     }
 
-    fun play(cups: MutableMap<Int, Int>, head: Int, numRounds: Int) {
+    fun play(input: Map<Int, Int>, head: Int, numRounds: Int): Map<Int, Int> {
+        val cups = input.toMutableMap()
         var current = head
         val maxCupLabel = cups.keys.maxOrNull()!!
         repeat(numRounds) { _ ->
@@ -26,18 +27,17 @@ object Day23 {
             cups[destination] = next3Head
             current = cups[current]!!
         }
+        return cups
     }
 
     fun arrangeCups(cups: List<Int>) = cups.withIndex().associate { it.value to cups[(it.index + 1) % cups.size] }
-
 }
 
 fun main() {
     val input = Resources.readFileAsString("input.txt").map { Character.getNumericValue(it) }
 
     // Part 1
-    val cups1 = Day23.arrangeCups(input).toMutableMap()
-    Day23.play(cups1, input.first(), 100)
+    val cups1 = Day23.play(Day23.arrangeCups(input), input.first(), 100)
     println(buildString {
         var node = cups1[1]!!
         while (node != 1) {
@@ -47,7 +47,9 @@ fun main() {
     })
 
     // Part 2
-    val cups2 = Day23.arrangeCups(input.plus((input.maxOrNull()!! + 1)..1000000)).toMutableMap()
-    Day23.play(cups2, input.first(), 10000000)
+    val cups2 = Day23.play(Day23.arrangeCups(input.plus((
+            input.maxOrNull()!! + 1)..1000000)),
+            input.first(),
+            10000000)
     println(cups2[1]!!.toLong() * cups2[cups2[1]!!]!!.toLong())
 }
